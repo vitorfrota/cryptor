@@ -15,6 +15,7 @@ header h1 strong {
 }
 
 header p {
+    margin-top: 4px;
     font-size: 0.875rem;
     color: var(--neutral-500);
 }
@@ -28,6 +29,14 @@ header p {
     width: 100%;
     display: flex;
     justify-content: space-between;
+
+    .active {
+        color: var(--primary-default);
+
+        &::after{
+            background-color: var(--primary-default);
+        }
+    }
 }
 
 .box ul li {
@@ -83,9 +92,22 @@ header p {
 
 .keyContainer {
     flex: 3;
+
+    padding-left: 16px;
+
+    display: flex;
+    align-items: center;
+
+    svg {
+        width: 20px;
+        height: 20px;
+
+        color: var(--neutral-500);
+    }
+
     input {
-        padding: 24px 16px;
         width: 100%;
+        padding: 16px;
 
         border: none;
         border-top: 1px solid var(--neutral-100);
@@ -95,9 +117,21 @@ header p {
 
 .boxFooterContainer button {
     flex: 1;
-    background-color: var(--primary-default);
+
     border: none;
     font-weight: bold;
     text-transform: uppercase;
+    background-color: var(--primary-default);
     color: #fff;
+}
+
+.boxFooterContainer button:disabled{
+    background-color: var(--primary-light);
+    cursor: not-allowed;
+}
+
+footer {
+    font-weight: bold;
+    text-align: center;
+    color: var(--neutral-500);
 }

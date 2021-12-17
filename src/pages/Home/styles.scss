@@ -1,0 +1,103 @@
+.wrapper {
+    height: 100%;
+    max-width: 960px;
+
+    margin: 0 auto;
+    padding: 24px;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+header h1 strong {
+    color: var(--primary-default);
+}
+
+header p {
+    font-size: 0.875rem;
+    color: var(--neutral-500);
+}
+
+.box {
+    width: 100%;
+    background-color: #fff;
+}
+
+.box ul {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.box ul li {
+    position: relative;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+
+    padding: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: var(--neutral-300);
+
+    cursor: pointer;
+
+    transition: all 150ms linear;
+
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        height: 2px;
+        width: 100%;
+        background-color: var(--neutral-100);
+
+        transition: all 150ms linear;
+    }
+}
+
+.box ul li:hover{
+    color: var(--primary-default);
+
+    &::after{
+        background-color: var(--primary-default);
+    }
+}
+
+.box textarea {
+    width: 100%;
+
+    padding: 16px;
+
+    border: none;
+    outline: none;
+    resize: none;
+}
+
+.boxFooterContainer {
+    width: 100%;
+
+    display: flex;
+}
+
+.keyContainer {
+    flex: 3;
+    input {
+        padding: 24px 16px;
+        width: 100%;
+
+        border: none;
+        border-top: 1px solid var(--neutral-100);
+        outline: none;
+    }
+}
+
+.boxFooterContainer button {
+    flex: 1;
+    background-color: var(--primary-default);
+    border: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #fff;
+}

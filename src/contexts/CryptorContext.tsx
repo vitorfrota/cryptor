@@ -24,16 +24,7 @@ export const CryptorProvider: React.FC = ({ children }) => {
         setSelectedOption(option);
     }
 
-    function handleSubmit(event: any){
-        event.preventDefault();
-        const elements: any[] = Object
-        .values(event.target);
-
-        const formData = {
-            text: elements[0].value,
-            key: elements[1].value
-        }
-
+    function handleSubmit(formData: IFormData){
         convertText(formData);
     }
 

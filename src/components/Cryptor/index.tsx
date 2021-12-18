@@ -1,5 +1,6 @@
-import { useContext } from 'react';
-import { Formik } from 'formik';
+import { useContext, useEffect, useRef } from 'react';
+import { FormHandles, useField } from '@unform/core';
+import { Form } from '@unform/web';
 
 import { FiKey } from 'react-icons/fi';
 
@@ -7,57 +8,102 @@ import { CryptorContext } from '../../contexts/CryptorContext';
 
 import './styles.scss';
 
+function KeyInput(){
+    const inputRef = useRef(null);
+    const { fieldName, defaultValue, registerField, error } = useField('key');
+
+    const { handleInputChange } = useContext(CryptorContext);
+
+    useEffect(()=> {
+        registerField({
+            name: fieldName,
+            ref: inputRef.current,
+            path: 'value'
+        });
+    }, [fieldName, registerField]);
+
+    return (
+        <div className="keyContainer">
+            <FiKey />
+            <input 
+                name="key"
+                ref={inputRef}
+                defaultValue={defaultValue}
+                type="text"
+                onChange={handleInputChange} 
+                placeholder="Your secret key here..."
+            />
+        </div>
+    )
+}
+
+function TextInput(){
+    const inputRef = useRef(null);
+    const { fieldName, defaultValue, registerField, error } = useField('text');
+
+    const { selectedOption, handleInputChange } = useContext(CryptorContext);
+
+    useEffect(()=> {
+        registerField({
+            name: fieldName,
+            ref: inputRef.current,
+            path: 'value'
+        });
+    }, [fieldName, registerField]);
+
+    return (
+        <textarea 
+            name="text"
+            ref={inputRef}
+            defaultValue={defaultValue}
+            onChange={handleInputChange}
+            placeholder={`Put your text to ${selectedOption} here...`}
+            rows={4}
+        />
+    )
+}
+
 function Cryptor(){
-    const { selectedOption, handleChangeOption, handleSubmit } = useContext(CryptorContext);
+    const formRef = useRef<FormHandles>(null);
+
+    const { 
+        canSubmit,
+        formData,
+        selectedOption, 
+        handleChangeOption, 
+        handleSubmit 
+    } = useContext(CryptorContext);
+
+    function handleSelectOption(option: 'encrypt' | 'decrypt'){
+        formRef.current?.reset();
+
+        handleChangeOption(option);
+    }
 
     return (
         <div className='box'>
             <ul>
                 <li 
                     className={selectedOption === 'encrypt' ? 'active' : ''}
-                    onClick={()=> handleChangeOption('encrypt')}
+                    onClick={()=> handleSelectOption('encrypt')}
                 >Encrypt</li>
                 <li 
                     className={selectedOption === 'decrypt' ? 'active' : ''}
-                    onClick={()=> handleChangeOption('decrypt')}
+                    onClick={()=> handleSelectOption('decrypt')}
                 >Decrypt
                 </li>
             </ul>
-            <Formik 
-                initialValues={{ text: '', key: '' }}
-                onSubmit={(values)=> handleSubmit(values)}
-            >
-            {
-                ({ values, handleChange, handleSubmit }) => (
-                    <form onSubmit={handleSubmit}>
-                        <textarea
-                            placeholder={`Put your text to ${selectedOption} here...`}
-                            name="text"
-                            onChange={handleChange}
-                            value={values.text}
-                            rows={4}
-                        />
-                        <div className="boxFooterContainer">
-                            <div className="keyContainer">
-                                <FiKey />
-                                <input 
-                                    type="text" 
-                                    name="key"
-                                    placeholder="Your secret key here..."
-                                    onChange={handleChange}
-                                    value={values.key}
-                                />
-                            </div>
-                            <button
-                                type="submit"
-                                disabled={!(values.text !== '' && values.key !== '')}
-                            >{selectedOption}
-                            </button>
-                        </div>
-                    </form>
-                )
-            }
-            </Formik>
+            <Form ref={formRef} onSubmit={handleSubmit} initialData={formData}>
+                <TextInput />
+                <div className="boxFooterContainer">
+                    <KeyInput />
+                    <button
+                        type="submit"
+                        disabled={!canSubmit}
+                    >{selectedOption}
+                    </button>
+                </div>
+            </Form>
         </div>
     )
 }

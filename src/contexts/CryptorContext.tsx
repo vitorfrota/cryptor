@@ -1,4 +1,4 @@
-import { ChangeEvent, createContext, useEffect, useState } from "react";
+import { ChangeEvent, createContext, useCallback, useEffect, useState } from "react";
 import { decryptText, encryptText } from "../util/cryptUtil";
 
 interface IFormData {
@@ -26,31 +26,31 @@ export const CryptorProvider: React.FC = ({ children }) => {
     const [result, setResult] = useState('');
 
     useEffect(()=> {
-        formData.key !== '' && formData.text !== ''
+        formData.key !== '' && formData.key.length >= 5 && formData.text !== ''
         ? setCanSubmit(true)
         : setCanSubmit(false)
     }, [formData]);
 
-    function handleChangeOption(option: 'encrypt' | 'decrypt'){
+    const handleChangeOption = useCallback((option: 'encrypt' | 'decrypt') => {
         setFormData({ text: '', key: '' });
         setResult('');
         setSelectedOption(option);
-    }
+    }, []);
 
-    function handleInputChange(event: any){
+    const handleInputChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
 
         setFormData({
             ...formData,
             [name]: value
         });
-    }
+    }, [formData]);
 
-    function handleSubmit({ text, key }: IFormData){
+    const handleSubmit = useCallback(({ text, key }: IFormData) => {
         selectedOption === 'encrypt' 
         ? setResult(encryptText(text, key))
         : setResult(decryptText(text, key))
-    }
+    }, [selectedOption]);
 
     return (
         <CryptorContext.Provider 

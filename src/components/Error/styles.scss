@@ -1,0 +1,12 @@
+.containerError {
+    margin-top: 16px;
+    padding: 16px; 
+
+    display: flex;
+    align-items: center;
+    
+    background-color: var(--error-light);
+    color: var(--error-default);
+
+    font-weight: bold;
+}

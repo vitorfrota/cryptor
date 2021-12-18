@@ -5,7 +5,11 @@ function encryptText(message: string, key: string){
 }
 
 function decryptText(message: string, key: string){
-    return AES.decrypt(message, key).toString(enc.Utf8);
+    const result = AES.decrypt(message, key);
+
+    return result.sigBytes < 0
+            ? 'invalidKey'
+            : result.toString(enc.Utf8)
 }
 
 export {

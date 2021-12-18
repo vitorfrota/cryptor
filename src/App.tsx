@@ -1,7 +1,13 @@
 import Home from './pages/Home';
 
+import { CryptorProvider } from './contexts/CryptorContext';
+
 function App() {
-  return <Home />
+  return (
+    <CryptorProvider>
+      <Home />
+    </CryptorProvider>
+  )
 
 }
 

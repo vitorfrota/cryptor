@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef } from 'react';
+import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { FormHandles, useField } from '@unform/core';
 import { Form } from '@unform/web';
 
@@ -9,10 +9,12 @@ import { CryptorContext } from '../../contexts/CryptorContext';
 import './styles.scss';
 
 function KeyInput(){
-    const inputRef = useRef(null);
+    const inputRef = useRef<HTMLInputElement>(null);
     const { fieldName, defaultValue, registerField, error } = useField('key');
 
-    const { handleInputChange } = useContext(CryptorContext);
+    const [isFocused, setIsFocused] = useState(false);
+
+    const { handleInputChange, formData } = useContext(CryptorContext);
 
     useEffect(()=> {
         registerField({
@@ -22,8 +24,16 @@ function KeyInput(){
         });
     }, [fieldName, registerField]);
 
+    const handleInputBlur = useCallback(() => {
+        setIsFocused(false);
+      }, []);
+    
+    const handleInputFocus = useCallback(() => {
+        setIsFocused(true);
+    }, []);
+
     return (
-        <div className="keyContainer">
+        <div className={`keyContainer ${isFocused || formData.key ? 'isFilled' : ''}`}>
             <FiKey />
             <input 
                 name="key"
@@ -31,6 +41,8 @@ function KeyInput(){
                 defaultValue={defaultValue}
                 type="text"
                 onChange={handleInputChange} 
+                onFocus={handleInputFocus}
+                onBlur={handleInputBlur}
                 placeholder="Your secret key here..."
             />
         </div>

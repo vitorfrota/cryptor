@@ -1,0 +1,115 @@
+.box {
+    width: 100%;
+    background-color: #fff;
+
+    ul {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    
+        .active {
+            color: var(--primary-default);
+    
+            &::after{
+                background-color: var(--primary-default);
+            }
+        }
+    }
+
+    textarea {
+        width: 100%;
+
+        padding: 16px;
+    
+        border: none;
+        outline: none;
+        resize: none;
+    }
+}
+
+.box ul li {
+    position: relative;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+
+    padding: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: var(--neutral-300);
+
+    cursor: pointer;
+
+    transition: all 150ms linear;
+
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        height: 2px;
+        width: 100%;
+        background-color: var(--neutral-100);
+
+        transition: all 150ms linear;
+    }
+}
+
+.box ul li:hover{
+    color: var(--primary-default);
+
+    &::after{
+        background-color: var(--primary-default);
+    }
+}
+
+.boxFooterContainer {
+    width: 100%;
+
+    display: flex;
+
+    button {
+        flex: 1;
+
+        font-weight: bold;
+        text-transform: uppercase;
+        background-color: var(--primary-default);
+        color: #fff;
+
+        border: none;
+        outline: none;
+
+        &:hover{
+            filter: brightness(0.95);
+        }
+
+        &:disabled {
+            background-color: var(--primary-light);
+            cursor: not-allowed;
+        }
+    }
+}
+
+.keyContainer {
+    flex: 3;
+
+    padding-left: 16px;
+
+    display: flex;
+    align-items: center;
+
+    svg {
+        width: 20px;
+        height: 20px;
+
+        color: var(--neutral-500);
+    }
+
+    input {
+        width: 100%;
+        padding: 16px;
+
+        border: none;
+        border-top: 1px solid var(--neutral-100);
+        outline: none;
+    }
+}

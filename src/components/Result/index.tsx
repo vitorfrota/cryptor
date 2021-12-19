@@ -17,7 +17,7 @@ function Result(){
             <p>{result}</p>
             <button onClick={handleCopyResult}>
                 <FiCopy /> 
-                Copiar
+                Copy
             </button>
         </div>
     )

@@ -4,6 +4,8 @@
 
 ## 💻 Project
  <strong>Cryptor</strong> is a web application that encrypt/decrypt a text with a key, using AES(Advanced Encryption Standard).
+ 
+ <strong>Figma Project: </strong> https://abre.ai/cryptorfigma
 
  ## 🛸 Technologies
  

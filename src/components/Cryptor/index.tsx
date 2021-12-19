@@ -10,7 +10,7 @@ import './styles.scss';
 
 function KeyInput(){
     const inputRef = useRef<HTMLInputElement>(null);
-    const { fieldName, defaultValue, registerField, error } = useField('key');
+    const { fieldName, defaultValue, registerField } = useField('key');
 
     const [isFocused, setIsFocused] = useState(false);
 
@@ -51,7 +51,7 @@ function KeyInput(){
 
 function TextInput(){
     const inputRef = useRef(null);
-    const { fieldName, defaultValue, registerField, error } = useField('text');
+    const { fieldName, defaultValue, registerField } = useField('text');
 
     const { selectedOption, handleInputChange } = useContext(CryptorContext);
 

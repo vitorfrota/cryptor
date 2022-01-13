@@ -5,7 +5,7 @@ import { CryptorContext} from '../../contexts/CryptorContext';
 
 import './styles.scss';
 
-function Result(){
+export function Result(){
     const { result } = useContext(CryptorContext);
 
     const handleCopyResult = useCallback(async ()=> {
@@ -21,6 +21,4 @@ function Result(){
             </button>
         </div>
     )
-}
-
-export default Result;
+};

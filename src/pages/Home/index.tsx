@@ -1,10 +1,6 @@
 import { useContext } from 'react';
 
-import Cryptor from '../../components/Cryptor';
-import Error from '../../components/Error';
-import Header from '../../components/Header';
-import Result from '../../components/Result';
-
+import { Cryptor, Error, Header, Result } from '../../components';
 import { CryptorContext } from '../../contexts/CryptorContext';
 
 import './styles.scss';

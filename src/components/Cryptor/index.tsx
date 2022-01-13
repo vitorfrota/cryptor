@@ -75,7 +75,7 @@ function TextInput(){
     )
 }
 
-function Cryptor(){
+export function Cryptor(){
     const formRef = useRef<FormHandles>(null);
 
     const { 
@@ -118,6 +118,4 @@ function Cryptor(){
             </Form>
         </div>
     )
-}
-
-export default Cryptor;
+};
